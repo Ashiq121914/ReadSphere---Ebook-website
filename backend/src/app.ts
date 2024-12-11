@@ -4,7 +4,7 @@ const app = express();
 
 // Routes
 app.get("/", (req, res, next) => {
-  res.json({ message: "welcome to elib apis" });
+  res.json({ message: "welcome to ReadSphere apis" });
 });
 
 export default app;
