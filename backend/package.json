@@ -17,6 +17,7 @@
     "@types/express": "^5.0.0",
     "@types/http-errors": "^2.0.4",
     "@types/jsonwebtoken": "^9.0.7",
+    "@types/multer": "^1.4.12",
     "@types/node": "^22.10.1",
     "eslint": "^9.16.0",
     "globals": "^15.13.0",
@@ -31,6 +32,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "http-errors": "^2.0.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1"
   }
 }
