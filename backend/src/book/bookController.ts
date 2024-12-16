@@ -98,7 +98,8 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
     //send files to cloudinary
     const filePath = path.resolve(
       __dirname,
-      "../../public/data/uploads/" + filename
+      "../../public/data/uploads",
+      filename
     );
     completeCoverImage = filename;
     const uploadResult = await cloudinary.uploader.upload(filePath, {
@@ -109,19 +110,30 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
 
     completeCoverImage = uploadResult.secure_url;
 
-    await fs.promises.unlink(filePath);
+    try {
+      // delete temp files
+      await fs.promises.unlink(filePath);
+    } catch (err) {
+      return next(
+        createHttpError(
+          500,
+          "error while deleting the temp files while updating"
+        )
+      );
+    }
   }
 
   // for pdf cloudinary update
   // check if file field is exist
   let completeFileName = "";
   if (files.file) {
+    const bookFileName = files.file[0].filename;
     const bookFilePath = path.resolve(
       __dirname,
-      "../../public/data/uploads/" + files.file[0].filename
+      "../../public/data/uploads/",
+      bookFileName
     );
 
-    const bookFileName = files.file[0].filename;
     completeFileName = bookFileName;
 
     const uploadResultPdf = await cloudinary.uploader.upload(bookFilePath, {
@@ -131,7 +143,18 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
       format: "pdf",
     });
     completeFileName = uploadResultPdf.secure_url;
-    await fs.promises.unlink(bookFilePath);
+
+    try {
+      // delete temp files
+      await fs.promises.unlink(bookFilePath);
+    } catch (err) {
+      return next(
+        createHttpError(
+          500,
+          "error while deleting the temp pdfs while updating"
+        )
+      );
+    }
   }
 
   const updatedBook = await bookModel.findOneAndUpdate(
