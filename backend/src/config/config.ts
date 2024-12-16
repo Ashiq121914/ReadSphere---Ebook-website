@@ -10,6 +10,7 @@ const _config = {
   coudinaryCloud: process.env.COUDINARY_CLOUD,
   coudinaryApiKey: process.env.COUDINARY_API_KEY,
   coudinarySecret: process.env.COUDINARY_API_SECRET,
+  frontendDomain: process.env.FRONTEND_DOMAIN,
 };
 
 export const config = Object.freeze(_config);
