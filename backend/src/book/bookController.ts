@@ -4,6 +4,7 @@ import path from "node:path";
 import createHttpError from "http-errors";
 import bookModel from "./bookModel";
 import fs from "node:fs";
+import { AuthRequest } from "../middlewares/authenticate";
 
 const createBook = async (req: Request, res: Response, next: NextFunction) => {
   const { title, genre } = req.body;
@@ -43,13 +44,12 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
       }
     );
 
-    //@ts-ignore
-    console.log("userId", req.userId);
+    const _req = req as AuthRequest;
 
     const newBook = await bookModel.create({
       title,
       genre,
-      author: "675f3db93aa23850a8391822",
+      author: _req.userId,
       coverImage: uploadResult.secure_url,
       file: bookFileUploadResult.secure_url,
     });
