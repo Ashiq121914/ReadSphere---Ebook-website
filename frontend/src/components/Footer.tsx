@@ -1,9 +1,10 @@
 import React from "react";
 
 const Footer = () => {
+  const fullDate = new Date().getFullYear();
   return (
     <footer className="border-t p-5 text-center absolute bottom-0 w-full ">
-      <span>© 2024 ReadSphere, All rights reserved.</span>
+      <span>© {`${fullDate}`} ReadSphere, All rights reserved.</span>
     </footer>
   );
 };
