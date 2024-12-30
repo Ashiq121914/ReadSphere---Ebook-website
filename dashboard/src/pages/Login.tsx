@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/http/api";
 import { useMutation } from "@tanstack/react-query";
+import { LoaderCircle } from "lucide-react";
 import { useRef } from "react";
 import { useNavigate } from "react-router";
 
@@ -25,9 +26,6 @@ const Login = () => {
       console.log("Login successful");
       navigate("/dashboard/home");
     },
-    onError: () =>{
-      console.log("Give correct email and password please")
-    }
   });
 
   const handleLoginSubmit = (e: { preventDefault: () => void }) => {
@@ -46,7 +44,12 @@ const Login = () => {
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your email below to login to your account <br />
+            {mutation.isError && (
+              <span className="text-red-500 text-sm">
+                {"Something went wrong while Login"}
+              </span>
+            )}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -79,8 +82,15 @@ const Login = () => {
                   required
                 />
               </div>
-              <Button onClick={handleLoginSubmit} className="w-full">
-                Login
+              <Button
+                onClick={handleLoginSubmit}
+                className="w-full"
+                disabled={mutation.isPending}
+              >
+                {mutation.isPending && (
+                  <LoaderCircle className="animate-spin" />
+                )}
+                <span className="ml-2">Sign In</span>
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
