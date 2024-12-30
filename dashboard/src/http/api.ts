@@ -8,7 +8,8 @@ const api = axios.create({
 });
 
 export const login = async (data: { email: string; password: string }) => {
-  await api.post("/api/users/login", data);
+  const response = await api.post("/api/users/login", data);
+  return response;
 };
 
 export const register = async (data: {
@@ -16,5 +17,6 @@ export const register = async (data: {
   email: string;
   password: string;
 }) => {
-  await api.post("/api/users/register", data);
+  const response = await api.post("/api/users/register", data);
+  return response;
 };
