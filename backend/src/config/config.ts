@@ -11,6 +11,7 @@ const _config = {
   coudinaryApiKey: process.env.COUDINARY_API_KEY,
   coudinarySecret: process.env.COUDINARY_API_SECRET,
   frontendDomain: process.env.FRONTEND_DOMAIN,
+  dashboardDomain: process.env.DASHBOARD_DOMAIN,
 };
 
 export const config = Object.freeze(_config);
