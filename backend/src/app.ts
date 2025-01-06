@@ -22,7 +22,7 @@ app.use(
 app.use(express.json());
 
 // Routes
-app.use("/", (req: Request, res: Response) => {
+app.get("/", (req: Request, res: Response) => {
   res.json({ message: "welcome to ReadSphere apis" });
 });
 
