@@ -18,7 +18,8 @@ const SingleBookPage = async ({ params }: { params: { bookId: string } }) => {
       throw new Error("Error fetching book");
     }
     book = await response.json();
-  } catch (err: any) {
+  } catch (err) {
+    console.log(err);
     throw new Error("Error fetching book");
   }
 
