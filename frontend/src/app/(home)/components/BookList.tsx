@@ -13,7 +13,7 @@ const BookList = async () => {
   const books = await response.json();
 
   return (
-    <div className="grid grid-cols-1 gap-8 md:grid-cols-3 max-w-7xl mx-auto mb-10">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3  max-w-7xl mx-auto mb-10">
       {books.map((book: Book) => (
         <BookCard key={book._id} book={book} />
       ))}

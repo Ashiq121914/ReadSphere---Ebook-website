@@ -5,8 +5,9 @@ import React from "react";
 
 const BookCard = ({ book }: { book: Book }) => {
   return (
-    <div className="flex gap-5 border p-5 shadow-md rounded">
+    <div className="flex flex-wrap  md:flex-nowrap gap-5 border p-5 shadow-md rounded">
       <Image
+        className="mx-auto"
         src={book.coverImage}
         alt={book.title}
         width={0}
@@ -15,11 +16,11 @@ const BookCard = ({ book }: { book: Book }) => {
         style={{ width: "auto", height: "12rem" }}
       />
 
-      <div>
-        <h2 className="line-clamp-2 text-xl font-bold text-primary-600 text-balance">
+      <div className="mx-auto my-auto md:mx-0 text-center md:text-start">
+        <h2 className="line-clamp-2 md:text-xl text-[14px] font-bold text-primary-600 text-balance">
           {book.title}
         </h2>
-        <p className="font-bold text-primary-900 my-1">
+        <p className="font-bold text-primary-900 my-1 md:text-[20px] text-[14px] ">
           Published by: {book.author.name}
         </p>
 
