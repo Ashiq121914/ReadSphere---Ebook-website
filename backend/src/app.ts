@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import globalErrorHandler from "./middlewares/globalErrorHandler";
 import userRouter from "./user/userRouter";
@@ -22,7 +22,7 @@ app.use(
 app.use(express.json());
 
 // Routes
-app.get("/", (req, res) => {
+app.use("/", (req: Request, res: Response) => {
   res.json({ message: "welcome to ReadSphere apis" });
 });
 
