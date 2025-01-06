@@ -18,7 +18,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import useTokenStore from "@/store";
-
 import {
   Bell,
   CircleUser,
@@ -31,7 +30,8 @@ import {
   ShoppingCart,
   Users,
 } from "lucide-react";
-import { Link, Navigate, Outlet } from "react-router";
+import { Link, Navigate, NavLink, Outlet } from "react-router";
+
 const DashboardLayout = () => {
   const { token, setToken } = useTokenStore((state) => state);
 
@@ -40,9 +40,10 @@ const DashboardLayout = () => {
   }
 
   const logout = () => {
-    console.log("logged out!");
+    console.log("Logging out!");
     setToken("");
   };
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -59,20 +60,29 @@ const DashboardLayout = () => {
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              <Link
+              <NavLink
                 to="/dashboard/home"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                className={({ isActive }) => {
+                  return `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                    isActive && "bg-muted text-black"
+                  }`;
+                }}
               >
                 <Home className="h-4 w-4" />
                 Home
-              </Link>
-              <Link
+              </NavLink>
+
+              <NavLink
                 to="/dashboard/books"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+                className={({ isActive }) => {
+                  return `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                    isActive && "bg-muted text-black"
+                  }`;
+                }}
               >
                 <Package className="h-4 w-4" />
                 Books{" "}
-              </Link>
+              </NavLink>
             </nav>
           </div>
           <div className="mt-auto p-4">
@@ -107,7 +117,7 @@ const DashboardLayout = () => {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
-              <nav className="grid gap-2 text-lg font-medium">
+              {/* <nav className="grid gap-2 text-lg font-medium">
                 <Link
                   to="#"
                   className="flex items-center gap-2 text-lg font-semibold"
@@ -153,6 +163,31 @@ const DashboardLayout = () => {
                   <LineChart className="h-5 w-5" />
                   Analytics
                 </Link>
+              </nav> */}
+              <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+                <NavLink
+                  to="/dashboard/home"
+                  className={({ isActive }) => {
+                    return `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                      isActive && "bg-muted text-black"
+                    }`;
+                  }}
+                >
+                  <Home className="h-4 w-4" />
+                  Home
+                </NavLink>
+
+                <NavLink
+                  to="/dashboard/books"
+                  className={({ isActive }) => {
+                    return `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                      isActive && "bg-muted text-black"
+                    }`;
+                  }}
+                >
+                  <Package className="h-4 w-4" />
+                  Books{" "}
+                </NavLink>
               </nav>
               <div className="mt-auto">
                 <Card>
@@ -212,4 +247,5 @@ const DashboardLayout = () => {
     </div>
   );
 };
+
 export default DashboardLayout;
